@@ -114,15 +114,16 @@ module.exports.general = public_users;
 
 
 // ---------------------------------------------------------------------
-// Below: client-side functions that call the endpoints above using
-// Axios, demonstrating async/await and Promise callback patterns.
+// Tasks 10–13: same functionality as Tasks 1–4 above, but implemented
+// using Promise callbacks / async-await with Axios instead of
+// synchronous direct lookups on the `books` object.
 // Base URL assumes the server from index.js is running on port 5000.
 // ---------------------------------------------------------------------
 
 const BASE_URL = "http://localhost:5000";
 
 
-// Task 15: Get all books – using async/await
+// Task 10: Get the list of books available in the shop – using async/await
 async function getAllBooks() {
     try {
         const response = await axios.get(`${BASE_URL}/`);
@@ -134,7 +135,7 @@ async function getAllBooks() {
 }
 
 
-// Task 16: Search by ISBN – using Promise callbacks (.then/.catch)
+// Task 11: Get book details based on ISBN – using Promise callbacks (.then/.catch)
 function getBookByISBN(isbn) {
     return axios.get(`${BASE_URL}/isbn/${isbn}`)
         .then((response) => {
@@ -147,7 +148,7 @@ function getBookByISBN(isbn) {
 }
 
 
-// Task 17: Search by Author – using async/await
+// Task 12: Get book details based on Author – using async/await
 async function getBookByAuthor(author) {
     try {
         const response = await axios.get(`${BASE_URL}/author/${author}`);
@@ -159,7 +160,7 @@ async function getBookByAuthor(author) {
 }
 
 
-// Task 18: Search by Title – using Promise callbacks (.then/.catch)
+// Task 13: Get book details based on Title – using Promise callbacks (.then/.catch)
 function getBookByTitle(title) {
     return axios.get(`${BASE_URL}/title/${title}`)
         .then((response) => {
@@ -170,13 +171,6 @@ function getBookByTitle(title) {
             console.log("Error fetching books by title:", error.message);
         });
 }
-
-
-// Example calls (uncomment to test once the server is running):
-// getAllBooks();
-// getBookByISBN("1");
-// getBookByAuthor("Chinua Achebe");
-// getBookByTitle("Things Fall Apart");
 
 
 module.exports.getAllBooks = getAllBooks;
